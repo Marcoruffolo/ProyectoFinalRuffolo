@@ -1,11 +1,10 @@
-const BASE_URL = 'https://dummyjson.com';
+import { getProducts as getProductsFromDB, getProductsByCategory as getProductsByCategoryFromDB, getProductById as getProductByIdFromDB } from '../Firebase/db';
 
 export const getProducts = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      fetch(`${BASE_URL}/products?limit=100`)
-        .then(response => response.json())
-        .then(data => resolve(data.products))
+      getProductsFromDB()
+        .then(data => resolve(data))
         .catch(error => reject(error));
     }, 500);
   });
@@ -14,9 +13,8 @@ export const getProducts = () => {
 export const getProductsByCategory = (categoryId) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      fetch(`${BASE_URL}/products/category/${categoryId}`)
-        .then(response => response.json())
-        .then(data => resolve(data.products))
+      getProductsByCategoryFromDB(categoryId)
+        .then(data => resolve(data))
         .catch(error => reject(error));
     }, 500);
   });
@@ -25,21 +23,10 @@ export const getProductsByCategory = (categoryId) => {
 export const getProductById = (productId) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      fetch(`${BASE_URL}/products/${productId}`)
-        .then(response => response.json())
+      getProductByIdFromDB(productId)
         .then(data => resolve(data))
         .catch(error => reject(error));
     }, 500);
   });
 };
 
-export const getCategories = () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      fetch(`${BASE_URL}/products/categories`)
-        .then(response => response.json())
-        .then(data => resolve(data))
-        .catch(error => reject(error));
-    }, 500);
-  });
-};

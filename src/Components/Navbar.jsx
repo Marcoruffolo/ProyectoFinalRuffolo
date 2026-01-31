@@ -1,7 +1,5 @@
 import { Link, NavLink } from 'react-router-dom';
-import Button from "./Button";
-import { useContext } from 'react';
-import { CartContext } from '../context/cartcontext';
+import CartWidget from './CartWidget';
 
 function Navbar() { 
     const categories = [
@@ -12,8 +10,6 @@ function Navbar() {
         { id: 'groceries', name: 'Comestibles' },
         { id: 'home-decoration', name: 'Decoración' }
     ];
-
-    const context = useContext(CartContext);
 
     return (
         <header className='bg-gray-800 text-white shadow-lg'>
@@ -45,7 +41,7 @@ function Navbar() {
                         ))}
                     </nav>
                     
-                    <Button text={'Carrito'} styles='bg-blue-500 hover:bg-blue-600 p-2 rounded text-white transition-colors' />
+                    <CartWidget />
                 </div>
             </div>
         </header>

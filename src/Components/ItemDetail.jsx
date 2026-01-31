@@ -1,9 +1,15 @@
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import ItemCount from './ItemCount';
+import { CartContext } from '../context/CartContext';
 
 function ItemDetail({ product }) {
+  const [quantityAdded, setQuantityAdded] = useState(0);
+  const { addItem } = useContext(CartContext);
+
   const handleAddToCart = (quantity) => {
-    console.log(`Agregado ${quantity} unidad(es) de ${product.title} al carrito`);
+    setQuantityAdded(quantity);
+    addItem(product, quantity);
   };
 
   return (
@@ -65,11 +71,33 @@ function ItemDetail({ product }) {
           </div>
 
           <div className="border-t pt-6">
-            <ItemCount 
-              stock={product.stock} 
-              initial={1} 
-              onAdd={handleAddToCart}
-            />
+            {quantityAdded > 0 ? (
+              <div className="space-y-4">
+                <p className="text-green-600 font-semibold text-center">
+                  ✓ Agregado {quantityAdded} unidad(es) al carrito
+                </p>
+                <div className="flex gap-4">
+                  <Link 
+                    to="/cart" 
+                    className="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg transition-colors text-center"
+                  >
+                    Ir al Carrito
+                  </Link>
+                  <Link 
+                    to="/" 
+                    className="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-lg transition-colors text-center"
+                  >
+                    Seguir Comprando
+                  </Link>
+                </div>
+              </div>
+            ) : (
+              <ItemCount 
+                stock={product.stock} 
+                initial={1} 
+                onAdd={handleAddToCart}
+              />
+            )}
           </div>
 
           {product.tags && product.tags.length > 0 && (
