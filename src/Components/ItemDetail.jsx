@@ -5,7 +5,7 @@ import { CartContext } from '../context/CartContext';
 
 function ItemDetail({ product }) {
   const [quantityAdded, setQuantityAdded] = useState(0);
-  const { addItem } = useContext(CartContext);
+  const { addItem, cart } = useContext(CartContext);
 
   const imageUrl = product.url || product.imagen || product.thumbnail || 'https://via.placeholder.com/400?text=Sin+Imagen';
   const price = product.price || 0;
@@ -13,6 +13,10 @@ function ItemDetail({ product }) {
   const description = product.description || 'Sin descripción';
   const category = product.category || '';
   const stock = product.stock || 0;
+
+  const productInCart = cart.find(item => item.id === product.id);
+  const quantityInCart = productInCart ? productInCart.quantity : 0;
+  const availableStock = stock - quantityInCart;
 
   const handleAddToCart = (quantity) => {
     setQuantityAdded(quantity);
@@ -63,9 +67,14 @@ function ItemDetail({ product }) {
 
           <div>
             <span className="font-semibold text-black">Stock disponible: </span>
-            <span className={stock > 0 ? 'text-black' : 'text-gray-400'}>
-              {stock} unidades
+            <span className={availableStock > 0 ? 'text-black' : 'text-gray-400'}>
+              {availableStock} unidades
             </span>
+            {quantityInCart > 0 && (
+              <span className="text-gray-600 text-sm ml-2">
+                (Ya tienes {quantityInCart} en el carrito)
+              </span>
+            )}
           </div>
 
           <div className="border-t border-gray-200 pt-6">
@@ -91,7 +100,7 @@ function ItemDetail({ product }) {
               </div>
             ) : (
               <ItemCount 
-                stock={stock} 
+                stock={availableStock} 
                 initial={1} 
                 onAdd={handleAddToCart}
               />
