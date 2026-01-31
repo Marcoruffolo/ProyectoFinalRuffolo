@@ -3,27 +3,25 @@ import CartWidget from './CartWidget';
 
 function Navbar() { 
     const categories = [
-        { id: 'smartphones', name: 'Smartphones' },
-        { id: 'laptops', name: 'Laptops' },
-        { id: 'fragrances', name: 'Fragancias' },
-        { id: 'skin-care', name: 'Cuidado de Piel' },
-        { id: 'groceries', name: 'Comestibles' },
-        { id: 'home-decoration', name: 'Decoración' }
+        { id: 'consolas', name: 'Consolas' },
+        { id: 'celulares', name: 'Celulares' },
+        { id: 'televisores', name: 'Televisores' },
+        { id: 'computadoras', name: 'Computadoras' }
     ];
 
     return (
-        <header className='bg-gray-800 text-white shadow-lg'>
+        <header className='bg-black text-white border-b border-gray-800'>
             <div className='container mx-auto px-4'>
-                <div className='flex justify-between items-center py-4'>
-                    <Link to="/" className='text-3xl font-bold hover:text-blue-400 transition-colors'>
-                        🛒 E-Commerce
+                <div className='flex justify-between items-center py-6'>
+                    <Link to="/" className='text-3xl font-bold tracking-tight hover:text-gray-300 transition-colors'>
+                        Blancnoir
                     </Link>
                     
-                    <nav className='flex gap-6 items-center'>
+                    <nav className='flex gap-8 items-center'>
                         <NavLink 
                             to="/"
                             className={({ isActive }) => 
-                                isActive ? 'text-blue-400 font-semibold' : 'hover:text-blue-300 transition-colors'
+                                isActive ? 'text-white font-semibold border-b-2 border-white pb-1' : 'text-gray-400 hover:text-white transition-colors'
                             }
                         >
                             Todos
@@ -33,7 +31,7 @@ function Navbar() {
                                 key={category.id}
                                 to={`/category/${category.id}`}
                                 className={({ isActive }) => 
-                                    isActive ? 'text-blue-400 font-semibold' : 'hover:text-blue-300 transition-colors'
+                                    isActive ? 'text-white font-semibold border-b-2 border-white pb-1' : 'text-gray-400 hover:text-white transition-colors'
                                 }
                             >
                                 {category.name}

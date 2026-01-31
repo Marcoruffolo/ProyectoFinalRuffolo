@@ -12,7 +12,6 @@ export const getProducts = async () => {
     });
     return products;
   } catch (error) {
-    console.error("Error obteniendo productos:", error);
     throw error;
   }
 }
@@ -27,7 +26,6 @@ export const getProductsByCategory = async (categoryId) => {
     });
     return products;
   } catch (error) {
-    console.error("Error obteniendo productos por categoría:", error);
     throw error;
   }
 }
@@ -40,11 +38,9 @@ export const getProductById = async (productId) => {
     if (docSnap.exists()) {
       return { id: docSnap.id, ...docSnap.data() };
     } else {
-      console.log("No existe el producto");
       return null;
     }
   } catch (error) {
-    console.error("Error obteniendo producto:", error);
     throw error;
   }
 }
@@ -52,10 +48,8 @@ export const getProductById = async (productId) => {
 export const createOrder = async (order) => {
   try {
     const docRef = await addDoc(collection(db, "orders"), order);
-    console.log("Orden creada con ID:", docRef.id);
     return docRef.id;
   } catch (error) {
-    console.error("Error creando orden:", error);
     throw error;
   }
 }

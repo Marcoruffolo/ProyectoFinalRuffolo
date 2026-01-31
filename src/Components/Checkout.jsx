@@ -21,11 +21,11 @@ function Checkout() {
     return (
       <div className="container mx-auto px-4 py-16">
         <div className="text-center">
-          <h2 className="text-4xl font-bold mb-4">No hay productos en el carrito</h2>
+          <h2 className="text-4xl font-bold mb-4 text-black">No hay productos en el carrito</h2>
           <p className="text-gray-600 mb-8">Agrega productos antes de finalizar la compra</p>
           <button 
             onClick={() => navigate('/')}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg transition-colors"
+            className="bg-black hover:bg-gray-800 text-white font-bold py-3 px-8 rounded transition-colors uppercase tracking-wide text-sm"
           >
             Ver Productos
           </button>
@@ -51,8 +51,8 @@ function Checkout() {
         buyer: formData,
         items: cart.map(item => ({
           id: item.id,
-          title: item.title,
-          price: item.price,
+          name: item.name,
+          price: item.price || item.precio,
           quantity: item.quantity
         })),
         total: getTotal(),
@@ -63,7 +63,6 @@ function Checkout() {
       setOrderId(id);
       clear();
     } catch (err) {
-      console.error('Error al crear la orden:', err);
       setError('Hubo un error al procesar tu compra. Por favor intenta nuevamente.');
     } finally {
       setLoading(false);
@@ -73,24 +72,24 @@ function Checkout() {
   if (orderId) {
     return (
       <div className="container mx-auto px-4 py-16">
-        <div className="max-w-2xl mx-auto bg-green-50 rounded-lg p-8 text-center">
+        <div className="max-w-2xl mx-auto bg-white border-2 border-black rounded p-8 text-center">
           <div className="text-6xl mb-4">✓</div>
-          <h2 className="text-4xl font-bold text-green-600 mb-4">
+          <h2 className="text-4xl font-bold text-black mb-4">
             ¡Compra realizada con éxito!
           </h2>
           <p className="text-xl text-gray-700 mb-4">
             Tu orden ha sido procesada correctamente
           </p>
-          <div className="bg-white rounded-lg p-6 mb-6">
-            <p className="text-gray-600 mb-2">ID de tu orden:</p>
-            <p className="text-2xl font-bold text-blue-600 break-all">{orderId}</p>
+          <div className="bg-gray-50 rounded p-6 mb-6 border border-gray-200">
+            <p className="text-gray-600 mb-2 uppercase tracking-wide text-sm">ID de tu orden:</p>
+            <p className="text-2xl font-bold text-black break-all">{orderId}</p>
           </div>
           <p className="text-gray-600 mb-8">
             Guarda este ID para el seguimiento de tu compra
           </p>
           <button 
             onClick={() => navigate('/')}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-lg transition-colors"
+            className="bg-black hover:bg-gray-800 text-white font-bold py-3 px-8 rounded transition-colors uppercase tracking-wide text-sm"
           >
             Volver al Inicio
           </button>
@@ -177,7 +176,7 @@ function Checkout() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-green-500 hover:bg-green-600 disabled:bg-gray-400 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+              className="w-full bg-black hover:bg-gray-800 disabled:bg-gray-400 text-white font-bold py-3 px-6 rounded transition-colors uppercase tracking-wide text-sm"
             >
               {loading ? 'Procesando...' : 'Confirmar Compra'}
             </button>

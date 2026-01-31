@@ -21,7 +21,6 @@ function ItemListContainer() {
         setLoading(false);
       })
       .catch(error => {
-        console.error('Error al cargar productos:', error);
         setLoading(false);
       });
   }, [categoryId]);

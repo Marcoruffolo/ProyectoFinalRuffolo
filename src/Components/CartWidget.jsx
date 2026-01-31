@@ -9,7 +9,7 @@ function CartWidget() {
   return (
     <Link 
       to="/cart" 
-      className="relative bg-blue-500 hover:bg-blue-600 p-3 rounded-lg text-white transition-colors flex items-center space-x-2"
+      className="relative bg-white text-black hover:bg-gray-200 p-3 rounded transition-colors flex items-center space-x-2"
     >
       <svg 
         xmlns="http://www.w3.org/2000/svg" 
@@ -26,7 +26,7 @@ function CartWidget() {
         />
       </svg>
       {totalItems > 0 && (
-        <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">
+        <span className="absolute -top-2 -right-2 bg-black text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">
           {totalItems}
         </span>
       )}

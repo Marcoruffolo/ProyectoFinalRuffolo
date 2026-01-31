@@ -17,7 +17,6 @@ function ItemDetailContainer() {
         setLoading(false);
       })
       .catch(error => {
-        console.error('Error al cargar el producto:', error);
         setLoading(false);
       });
   }, [itemId]);
